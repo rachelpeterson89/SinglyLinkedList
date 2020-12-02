@@ -3,7 +3,9 @@ public class SinglyLinkedList {
     public SinglyLinkedList() {
         this.head = null;
     }
-    // SLL methods go here. As a starter, we will show you how to add a node to the list.
+    // SLL methods go here. 
+
+    // add a node to the list
     public void add(int value) {
         Node newNode = new Node(value);
         if(head == null) {
@@ -19,28 +21,31 @@ public class SinglyLinkedList {
 
     // remove a node from the end of the list
     public void remove() {
-        // Node newNode = new Node(value);
-        // if (head == null) {
-        //     return null;
-        // } 
-        // if (head.next = null) {
-        //     return null;
-        // }
         Node runner = head;
-        while (runner.next.next != null) {
-            runner = runner.next;
+        if(isEmpty() == true) {
+            return;
+        } else if ( runner.next == null) {
+            runner = null;
+        } else {
+            while (runner.next.next != null) {
+                runner = runner.next;
+            }
+            runner.next = null;
         }
-        runner.next = null;
-        // System.out.println(SinglyLinkedList())
+        
+    }
 
-        // return runner;
+    // see if node head of node is empty or null
+    public boolean isEmpty() {
+        if(head == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // print nodes
     public void printValues() {
-        // for (int i = 0; i < Node.size(); i++) {
-        //     System.out.println(Node.getValue(i));
-        // }
         Node runner = head;
         System.out.println('\n');
         while (runner != null) {
@@ -52,28 +57,32 @@ public class SinglyLinkedList {
     // find a specific node given an input
     public void find(int num) {
         Node runner = head;
+        boolean nodeFound = false;
+
         while (runner != null) {
             if (runner.value == num) {
+                nodeFound = true;
                 System.out.print('\n' + "----------------------------");
                 System.out.print('\n' + " This is the node you were looking for: | " + runner.value + " | ");
             }
             runner = runner.next;
         }
-        System.out.print('\n' + " There is no such node with a value of: " + num);
+        if (nodeFound == false) {
+            System.out.print('\n' + " There is no such node with a value of: " + num);
+        }
     }
 
     // remove the node after n nodes
-    // not currently working for 0 case
     public void removeAt(int num) {
         Node runner = head;
         int nodeCounter = 0;
 
-        if (num == nodeCounter) {
-            System.out.println(runner.value);
-            runner = runner.next;
+        if(isEmpty() == true) {
+            return;
+        } else if (num == nodeCounter) {
+            head = head.next;
         } else {
             Node previous = runner;
-
             while (runner.next != null) {
                 if(num == nodeCounter) {
                     previous.next = runner.next;
@@ -87,14 +96,5 @@ public class SinglyLinkedList {
                 previous.next = runner.next;
             }
         }
-
-        // // while (runner.next != null) {
-        //     if (num == nodeCounter) {
-        //         runner = null;
-        //         // nodeCounter++;
-        //     } else {
-        //         nodeCounter++;
-        //     }
-        // }
     }
 }
